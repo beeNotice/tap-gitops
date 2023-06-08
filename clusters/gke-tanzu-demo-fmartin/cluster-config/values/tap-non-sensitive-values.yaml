@@ -43,7 +43,7 @@ tap_install:
 
     grype:
       namespace: "default"
-      targetImagePullSecret: "registry-credentials"
+      targetImagePullSecret: "registries-credentials"
 
     contour:
       envoy:
