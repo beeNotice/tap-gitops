@@ -16,15 +16,21 @@ tap_install:
     buildservice:
       kp_default_repository: "fmartin.azurecr.io/fmartin/build-service/"
 
-    supply_chain: basic
+    supply_chain: testing_scanning
 
-    ootb_supply_chain_basic:
+    ootb_supply_chain_testing_scanning:
       registry:
         server: "fmartin.azurecr.io"
         repository: "fmartin/tanzu-app-tap"
       gitops:
-        # Leave empty for public repos, add a secret for private repos.
-        ssh_secret: ""
+        server_address: ssh://git@github.com/
+        repository_owner: beeNotice
+        repository_name: tanzu-app-deploy
+        branch: main
+        user_name: tap-test
+        user_email: tap@vmware.com
+        commit_message: "Update from TAP Supply Chain Choreographer"
+        ssh_secret: git-ssh
 
     tap_gui:
       service_type: ClusterIP
