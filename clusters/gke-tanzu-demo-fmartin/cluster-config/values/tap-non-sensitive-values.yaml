@@ -67,10 +67,6 @@ tap_install:
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/namespace-provisioner-ootb-supply-chain.html
     namespace_provisioner:
       controller: false
-      import_data_values_secrets:
-        - name: git-ssh
-          namespace: tanzu-config
-          create_export: true
       additional_sources:
         - git:
             ref: origin/main
