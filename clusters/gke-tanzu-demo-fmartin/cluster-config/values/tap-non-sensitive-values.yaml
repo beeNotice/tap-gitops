@@ -88,6 +88,15 @@ tap_install:
         ref: origin/main
         subPath: ns-provisioner/namespace
         url: https://github.com/beeNotice/tap-gitops.git
+      overlay_secrets:
+        - name: workload-git-auth-overlay
+          namespace: tap-install
+          create_export: true
+#      default_parameters:
+#        supply_chain_service_account:
+#          secrets:
+#            - git-ssh
+
 
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/application-accelerator-configuration.html
 #    package_overlays:
