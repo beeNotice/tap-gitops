@@ -64,11 +64,18 @@ tap_install:
         sourceUrls: "https://petstore.swagger.io/v2/swagger.json,https://petstore3.swagger.io/api/v3/openapi.json,https://tanzu-app-deploy.dev.tanzu.beenotice.eu/v3/api-docs"
 
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-set-up-namespaces.html
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/namespace-provisioner-ootb-supply-chain.html
     namespace_provisioner:
       controller: false
+      additional_sources:
+        - git:
+            ref: origin/main
+            subPath: ns-provisioner/testing-scanning-supplychain
+            url: https://github.com/beeNotice/tap-gitops.git
+          path: _ytt_lib/testing-scanning-supplychain-setup
       gitops_install:
         ref: origin/main
-        subPath: ns-provisioner
+        subPath: ns-provisioner/gitops-install
         url: https://github.com/beeNotice/tap-gitops.git
 
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/application-accelerator-configuration.html
