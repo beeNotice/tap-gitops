@@ -92,6 +92,7 @@ tap_install:
         - name: workload-git-auth-overlay
           namespace: tap-install
           create_export: true
+# Starting from 1.6, remove the overlay_secrets configuration + secret
 #      default_parameters:
 #        supply_chain_service_account:
 #          secrets:
