@@ -1,0 +1,53 @@
+tap_install:
+  values:
+    profile: run
+    ceip_policy_disclosed: true
+
+    shared:
+      ingress_domain: tanzu.beenotice.eu
+      image_registry:
+        project_path: "fmartin.azurecr.io/fmartin"
+
+    supply_chain: basic
+
+    contour:
+      envoy:
+        service:
+          type: LoadBalancer
+
+    appliveview_connector:
+      backend:
+        sslDeactivated: true
+        ingressEnabled: true
+        host: appliveview.tanzu.beenotice.eu
+
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-set-up-namespaces.html
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/namespace-provisioner-ootb-supply-chain.html
+    namespace_provisioner:
+      controller: false
+      additional_sources:
+        - git:
+            ref: origin/main
+            subPath: ns-provisioner/namespace-resources
+            url: https://github.com/beeNotice/tap-gitops.git
+          path: _ytt_lib/namespace-resources-setup
+      gitops_install:
+        ref: origin/main
+        subPath: ns-provisioner/namespace
+        url: https://github.com/beeNotice/tap-gitops.git
+      overlay_secrets:
+        - name: workload-git-auth-overlay
+          namespace: tap-install
+          create_export: true
+# Starting from 1.6, remove the overlay_secrets configuration + secret
+#      default_parameters:
+#        supply_chain_service_account:
+#          secrets:
+#            - git-ssh
+
+
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/application-accelerator-configuration.html
+#    package_overlays:
+#      - name: tap-gui
+#        secrets:
+#          - name: patch-tap-gui-timeout

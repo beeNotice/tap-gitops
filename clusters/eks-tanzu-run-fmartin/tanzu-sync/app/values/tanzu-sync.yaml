@@ -1,0 +1,7 @@
+---
+git:
+  url: git@github.com:beeNotice/tap-gitops.git
+  ref: origin/main
+  sub_path: clusters/eks-tanzu-run-fmartin/cluster-config
+tap_package_repository:
+  oci_repository: fmartin.azurecr.io/fmartin/tap-packages
