@@ -1,0 +1,9 @@
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ClassClaim
+metadata:
+  name: postgresql-claim
+spec:
+  classRef:
+    name: cloudsql-postgres
+  parameters:
+    storageGB: 10
