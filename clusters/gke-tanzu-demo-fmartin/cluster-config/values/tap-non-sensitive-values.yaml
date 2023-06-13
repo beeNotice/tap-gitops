@@ -70,6 +70,7 @@ tap_install:
         git:
           url: https://github.com/beeNotice/tanzu-app
           ref: origin/main
+          secret_ref: ""
 
     api_portal:
       apiPortalServer:
