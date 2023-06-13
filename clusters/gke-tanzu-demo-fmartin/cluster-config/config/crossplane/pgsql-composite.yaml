@@ -14,7 +14,7 @@ spec:
     - database
     - username
     - password
-  group: bindable.database.example.org
+  group: database.gcp.example.org
   names:
     kind: XPostgreSQLInstance
     plural: xpostgresqlinstances
