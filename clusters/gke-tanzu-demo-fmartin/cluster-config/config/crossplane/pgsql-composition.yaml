@@ -3,7 +3,7 @@ kind: Composition
 metadata:
   labels:
     provider: gcp
-  name: xpostgresqlinstances.bindable.gcp.database.example.org
+  name: xpostgresqlinstances.database.gcp.example.org
 spec:
   compositeTypeRef:
     apiVersion: bindable.database.example.org/v1alpha1

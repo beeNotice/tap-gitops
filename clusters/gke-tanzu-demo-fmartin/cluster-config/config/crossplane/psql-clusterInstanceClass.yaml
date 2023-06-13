@@ -5,9 +5,6 @@ metadata:
 spec:
   description:
     short: GCP CloudSQL Postgresql database instances
-  pool:
-    kind: Secret
-    labelSelector:
-      matchLabels:
-        services.apps.tanzu.vmware.com/class: cloudsql-postgres
-    fieldSelector: type=connection.crossplane.io/v1alpha1
+  provisioner:
+    crossplane:
+      compositeResourceDefinition: xpostgresqlinstances.database.gcp.example.org

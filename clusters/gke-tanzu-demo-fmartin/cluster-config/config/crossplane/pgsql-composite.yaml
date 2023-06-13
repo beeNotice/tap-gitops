@@ -1,7 +1,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xpostgresqlinstances.bindable.database.example.org
+  name: xpostgresqlinstances.database.gcp.example.org
 spec:
   claimNames:
     kind: PostgreSQLInstance
