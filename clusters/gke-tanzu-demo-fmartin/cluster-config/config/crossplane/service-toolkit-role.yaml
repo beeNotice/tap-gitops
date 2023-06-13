@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: app-operator-claim-class-bigcorp-rabbitmq
+  name: app-operator-claim-class-cloudsql-postgres
   labels:
     # (Optional) Aggregates this ClusterRole to Tanzu Application Platform's
     # app-operator user role at the cluster scope. You can choose to aggregate
