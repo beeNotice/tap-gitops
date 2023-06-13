@@ -26,15 +26,9 @@ spec:
           properties:
             spec:
               properties:
-                parameters:
-                  properties:
-                    storageGB:
-                      type: integer
-                  required:
-                    - storageGB
-                  type: object
-              required:
-                - parameters
+                storageGB:
+                  type: integer
+                  default: 10
               type: object
           type: object
       served: true

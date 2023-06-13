@@ -6,7 +6,7 @@ metadata:
   name: xpostgresqlinstances.database.gcp.example.org
 spec:
   compositeTypeRef:
-    apiVersion: bindable.database.example.org/v1alpha1
+    apiVersion: database.gcp.example.org/v1alpha1
     kind: XPostgreSQLInstance
   publishConnectionDetailsWithStoreConfigRef:
     name: default
@@ -16,6 +16,7 @@ spec:
         kind: CloudSQLInstance
         spec:
           forProvider:
+            # NOTE: configure this section to your specific requirements
             databaseVersion: POSTGRES_14
             region: europe-west9
             settings:
