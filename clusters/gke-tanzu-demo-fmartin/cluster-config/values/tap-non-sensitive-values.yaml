@@ -64,6 +64,13 @@ tap_install:
       metadataStore:
         url: "" # Disable embedded integration since it's deprecated
 
+    accelerator:
+      managed_resources:
+        enable: true
+        git:
+          url: https://github.com/beeNotice/tanzu-app
+          ref: origin/main
+
     api_portal:
       apiPortalServer:
         trustInsecureSourceUrls: true
@@ -103,9 +110,8 @@ tap_install:
 #          secrets:
 #            - git-ssh
 
-
-    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/application-accelerator-configuration.html
-#    package_overlays:
-#      - name: tap-gui
-#        secrets:
-#          - name: patch-tap-gui-timeout
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/application-accelerator-configuration.html#configure-ingress-timeouts-when-some-accelerators-take-longer-to-generate-11
+    package_overlays:
+      - name: tap-gui
+        secrets:
+          - name: patch-tap-gui-timeout
