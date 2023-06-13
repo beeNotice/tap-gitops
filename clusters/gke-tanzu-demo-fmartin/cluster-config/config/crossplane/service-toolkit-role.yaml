@@ -1,15 +1,20 @@
+# https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/services-toolkit-reference-api-rbac.html#the-claim-verb-for-clusterinstanceclass-4
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: stk-secret-reader
+  name: app-operator-claim-class-bigcorp-rabbitmq
   labels:
-    servicebinding.io/controller: "true"
+    # (Optional) Aggregates this ClusterRole to Tanzu Application Platform's
+    # app-operator user role at the cluster scope. You can choose to aggregate
+    # this to any of the other standard user roles as well.
+    apps.tanzu.vmware.com/aggregate-to-app-operator-cluster-access: "true"
 rules:
+  # Permits claiming from the 'cloudsql-postgres' class
   - apiGroups:
-      - ""
+      - services.apps.tanzu.vmware.com
     resources:
-      - secrets
+      - clusterinstanceclasses
+    resourceNames:
+      - cloudsql-postgres
     verbs:
-      - get
-      - list
-      - watch
+      - claim
