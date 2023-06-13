@@ -20,10 +20,9 @@ rules:
       - claim
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: app-operator-binding
-  namespace: dev
 subjects:
   - kind: User
     name: fmartin@vmware.com
