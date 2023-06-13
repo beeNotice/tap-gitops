@@ -1,3 +1,4 @@
+---
 # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/services-toolkit-reference-api-rbac.html#the-claim-verb-for-clusterinstanceclass-4
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -9,7 +10,6 @@ metadata:
     # this to any of the other standard user roles as well.
     apps.tanzu.vmware.com/aggregate-to-app-operator-cluster-access: "true"
 rules:
-  # Permits claiming from the 'cloudsql-postgres' class
   - apiGroups:
       - services.apps.tanzu.vmware.com
     resources:
@@ -18,3 +18,17 @@ rules:
       - cloudsql-postgres
     verbs:
       - claim
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-operator-binding
+  namespace: dev
+subjects:
+  - kind: User
+    name: fmartin@vmware.com
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: app-operator-claim-class-cloudsql-postgres
+  apiGroup: rbac.authorization.k8s.io
