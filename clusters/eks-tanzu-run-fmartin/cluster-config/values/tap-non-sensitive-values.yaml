@@ -5,6 +5,7 @@ tap_install:
 
     shared:
       ingress_domain: tanzu-eks.beenotice.eu
+      ingress_issuer: ""
       image_registry:
         project_path: "fmartin.azurecr.io/fmartin"
 
@@ -14,12 +15,6 @@ tap_install:
       envoy:
         service:
           type: LoadBalancer
-
-    appliveview_connector:
-      backend:
-        sslDeactivated: true
-        ingressEnabled: true
-        host: appliveview.tanzu.beenotice.eu
 
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-set-up-namespaces.html
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/namespace-provisioner-ootb-supply-chain.html
