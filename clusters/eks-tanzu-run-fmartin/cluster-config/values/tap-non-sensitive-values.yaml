@@ -11,11 +11,9 @@ tap_install:
     supply_chain: basic
 
     contour:
-      infrastructure_provider: aws
       envoy:
         service:
-          aws:
-            LBType: nlb
+          type: LoadBalancer
 
     appliveview_connector:
       backend:
