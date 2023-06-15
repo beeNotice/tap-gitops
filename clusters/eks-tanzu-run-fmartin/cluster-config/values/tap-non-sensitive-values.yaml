@@ -15,6 +15,13 @@ tap_install:
         service:
           type: LoadBalancer
 
+    # Register to View server
+    appliveview_connector:
+      backend:
+        sslDeactivated: true
+        ingressEnabled: true
+        host: appliveview.tanzu.beenotice.eu
+
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-set-up-namespaces.html
     # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/namespace-provisioner-ootb-supply-chain.html
     namespace_provisioner:
