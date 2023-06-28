@@ -3,6 +3,9 @@ tap_install:
     profile: run
     ceip_policy_disclosed: true
 
+    excluded_packages:
+      - eventing.tanzu.vmware.com
+
     shared:
       ingress_domain: tanzu-eks.beenotice.eu
       image_registry:
@@ -32,6 +35,11 @@ tap_install:
             subPath: ns-provisioner/namespace-resources
             url: https://github.com/beeNotice/tap-gitops.git
           path: _ytt_lib/namespace-resources-setup
+        - git:
+            ref: origin/main
+            subPath: ns-provisioner/bitnami-postgres-claim
+            url: https://github.com/beeNotice/tap-gitops.git
+          path: _ytt_lib/bitnami-postgres-claim
       gitops_install:
         ref: origin/main
         subPath: ns-provisioner/namespace
