@@ -37,9 +37,9 @@ tap_install:
           path: _ytt_lib/namespace-resources-setup
         - git:
             ref: origin/main
-            subPath: ns-provisioner/bitnami-postgres-claim
+            subPath: ns-provisioner/eks
             url: https://github.com/beeNotice/tap-gitops.git
-          path: _ytt_lib/bitnami-postgres-claim
+          path: _ytt_lib/eks
       gitops_install:
         ref: origin/main
         subPath: ns-provisioner/namespace
