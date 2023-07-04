@@ -2,9 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: sample-configuration
-type: Opaque
+type: servicebinding.io/config
 stringData:
-  application-prod.yml: |-
-    tanzu:
-      super-feature:
-        enabled: false
+  type: config
+  super-feature: false
