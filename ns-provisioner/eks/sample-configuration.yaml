@@ -4,5 +4,5 @@ metadata:
   name: sample-configuration
 type: servicebinding.io/config
 stringData:
-  type: config
-  super-feature: false
+  type: "config"
+  super-feature: "false"

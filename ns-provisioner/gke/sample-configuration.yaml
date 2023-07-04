@@ -5,4 +5,4 @@ metadata:
 type: servicebinding.io/config
 stringData:
   type: "config"
-  super-feature: "true"
+  super-feature: "false"
