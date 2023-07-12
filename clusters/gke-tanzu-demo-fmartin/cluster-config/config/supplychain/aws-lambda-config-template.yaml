@@ -1,7 +1,3 @@
-#@ load("@ytt:data", "data")
-
-#@ if/end "config-template" not in data.values.excluded_templates:
----
 apiVersion: carto.run/v1alpha1
 kind: ClusterConfigTemplate
 metadata:
