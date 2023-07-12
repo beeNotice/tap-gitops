@@ -33,8 +33,14 @@ tap_install:
         commit_message: "Update from TAP Supply Chain Choreographer"
         ssh_secret: git-ssh
       supported_workloads:
-        - cluster_config_template_name: aws-lambda-config-template
-          type: aws-lambda
+        - type: web
+          cluster_config_template_name: config-template
+        - type: server
+          cluster_config_template_name: server-template
+        - type: worker
+          cluster_config_template_name: worker-template
+        - type: aws-lambda
+          cluster_config_template_name: aws-lambda-config-template
 
     tap_gui:
       service_type: ClusterIP
