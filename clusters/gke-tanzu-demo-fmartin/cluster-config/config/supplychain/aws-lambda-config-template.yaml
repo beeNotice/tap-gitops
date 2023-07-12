@@ -1,0 +1,48 @@
+#@ load("@ytt:data", "data")
+
+#@ if/end "config-template" not in data.values.excluded_templates:
+---
+apiVersion: carto.run/v1alpha1
+kind: ClusterConfigTemplate
+metadata:
+  name: aws-lambda-config-template
+spec:
+  configPath: .data
+  healthRule:
+    alwaysHealthy: {}
+
+  ytt: |
+    #@ load("@ytt:data", "data")
+    #@ load("@ytt:yaml", "yaml")
+
+    #@ def merge_labels(fixed_values):
+    #@   labels = {}
+    #@   if hasattr(data.values.workload.metadata, "labels"):
+    #@     labels.update(data.values.workload.metadata.labels)
+    #@   end
+    #@   labels.update(fixed_values)
+    #@   return labels
+    #@ end
+
+    #@ def delivery():
+    module "lambda_function_container_image" {
+      source = "terraform-aws-modules/lambda/aws"
+    
+      function_name = "my-lambda-existing-package-local"
+      description   = "My awesome lambda function"
+    
+      create_package = false
+    
+      image_uri    = #@ data.values.image
+      package_type = "Image"
+    }
+    #@ end
+
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: #@ data.values.workload.metadata.name
+      labels: #@ merge_labels({ "app.kubernetes.io/component": "config" })
+    data:
+      delivery.yml: #@ yaml.encode(delivery())

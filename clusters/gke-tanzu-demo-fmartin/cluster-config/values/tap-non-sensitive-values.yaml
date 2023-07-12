@@ -32,6 +32,9 @@ tap_install:
         user_email: tap@vmware.com
         commit_message: "Update from TAP Supply Chain Choreographer"
         ssh_secret: git-ssh
+      supported_workloads:
+        - cluster_config_template_name: aws-lambda-config-template
+          type: aws-lambda
 
     tap_gui:
       service_type: ClusterIP
