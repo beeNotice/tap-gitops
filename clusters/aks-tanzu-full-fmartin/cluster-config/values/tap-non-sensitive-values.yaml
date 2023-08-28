@@ -1,0 +1,110 @@
+tap_install:
+  values:
+    profile: full
+
+    excluded_packages:
+      - learningcenter.tanzu.vmware.com
+      - workshops.learningcenter.tanzu.vmware.com
+      - eventing.tanzu.vmware.com
+
+    shared:
+      ingress_domain: tanzu.beenotice.eu
+      image_registry:
+        project_path: "fmartin.azurecr.io/fmartin"
+
+    ceip_policy_disclosed: true
+
+    buildservice:
+      kp_default_repository: "fmartin.azurecr.io/fmartin/build-service/"
+
+    supply_chain: testing_scanning
+
+    ootb_supply_chain_testing_scanning:
+      registry:
+        server: "fmartin.azurecr.io"
+        repository: "fmartin/tanzu-app-tap"
+      gitops:
+        server_address: ssh://git@github.com/
+        repository_owner: beeNotice
+        repository_name: tanzu-app-deploy
+        branch: main
+        user_name: tap-test
+        user_email: tap@vmware.com
+        commit_message: "Update from TAP Supply Chain Choreographer"
+        ssh_secret: git-ssh
+
+    tap_gui:
+      service_type: ClusterIP
+      metadataStoreAutoconfiguration: true
+      app_config:
+        customize:
+          custom_name: Fabien TAP Demo
+        organization:
+          name: "beeNotice"
+        catalog:
+          locations:
+            - type: url
+              target: https://github.com/beeNotice/tap-catalog/blob/main/catalog-info.yaml
+            - type: url
+              target: https://github.com/beeNotice/hungryman/blob/main/catalog/catalog-info.yaml
+
+    grype:
+      namespace: "default"
+      targetImagePullSecret: "registries-credentials"
+
+    contour:
+      envoy:
+        service:
+          type: LoadBalancer
+
+    metadata_store:
+      ns_for_export_app_cert: "*"
+      app_service_type: ClusterIP
+
+    scanning:
+      metadataStore:
+        url: "" # Disable embedded integration since it's deprecated
+
+    accelerator:
+      managed_resources:
+        enable: true
+        git:
+          url: https://github.com/beeNotice/tap-gitops
+          ref: origin/main
+          sub_path: accelerators
+          secret_ref: ""
+
+    api_portal:
+      apiPortalServer:
+        trustInsecureSourceUrls: true
+        sourceUrls: "https://petstore.swagger.io/v2/swagger.json,https://petstore3.swagger.io/api/v3/openapi.json,https://tanzu-app-deploy.dev.tanzu.beenotice.eu/v3/api-docs"
+
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-set-up-namespaces.html
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/namespace-provisioner-ootb-supply-chain.html
+    namespace_provisioner:
+      controller: false
+      additional_sources:
+        - git:
+            ref: origin/main
+            subPath: ns-provisioner/testing-scanning-supplychain
+            url: https://github.com/beeNotice/tap-gitops.git
+          path: _ytt_lib/testing-scanning-supplychain-setup
+        - git:
+            ref: origin/main
+            subPath: ns-provisioner/namespace-resources
+            url: https://github.com/beeNotice/tap-gitops.git
+          path: _ytt_lib/namespace-resources-setup
+      gitops_install:
+        ref: origin/main
+        subPath: ns-provisioner/namespace
+        url: https://github.com/beeNotice/tap-gitops.git
+      default_parameters:
+        supply_chain_service_account:
+          secrets:
+            - git-ssh
+
+    # https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.6/tap/application-accelerator-configuration.html#configure-ingress-timeouts-when-some-accelerators-take-longer-to-generate-11
+    package_overlays:
+      - name: tap-gui
+        secrets:
+          - name: patch-tap-gui-timeout
