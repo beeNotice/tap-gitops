@@ -88,12 +88,10 @@ tap_install:
             ref: origin/main
             subPath: ns-provisioner/testing-scanning-supplychain
             url: https://github.com/beeNotice/tap-gitops.git
-          path: _ytt_lib/testing-scanning-supplychain-setup
         - git:
             ref: origin/main
             subPath: ns-provisioner/namespace-resources
             url: https://github.com/beeNotice/tap-gitops.git
-          path: _ytt_lib/namespace-resources-setup
       gitops_install:
         ref: origin/main
         subPath: ns-provisioner/namespace
