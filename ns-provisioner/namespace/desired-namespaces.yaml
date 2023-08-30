@@ -4,7 +4,7 @@ namespaces:
   #! The only required parameter is the name of the namespace. All additional values provided here
   #! for a namespace will be available under data.values for templating additional sources
   - name: dev
-      type: dev
+    type: dev
   - name: prod
-      skip_grype: true
-      type: prod
+    skip_grype: true
+    type: prod
