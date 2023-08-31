@@ -14,9 +14,6 @@ tap_install:
 
     ceip_policy_disclosed: true
 
-    buildservice:
-      kp_default_repository: "fmartin.azurecr.io/fmartin/build-service"
-
     supply_chain: testing_scanning
 
     ootb_supply_chain_testing_scanning:
